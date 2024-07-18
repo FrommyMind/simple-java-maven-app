@@ -1,12 +1,14 @@
+
+/* Requires the Docker Pipeline plugin */
 pipeline {
-    agent any
+    agent { docker { image 'maven:3.9.8-eclipse-temurin-21-alpine' } }
     environment {
         JAVA_HOME = '/usr/lib/jvm/openlogic-openjdk-17-hotspot/'
     }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh '/opt/apache-maven-3.9.8/bin/mvn -B -DskipTests clean package'
+                sh 'mvn --version'
             }
         }
     }
